@@ -1,258 +1,145 @@
-\# Amazon Prime Video – Exploratory Data Analysis
+# Amazon Prime Video — Exploratory Data Analysis
 
+An end-to-end Exploratory Data Analysis (EDA) project exploring Amazon Prime Video's content catalog using Python, Pandas, Matplotlib, and Seaborn.
 
+The project investigates content types, genres, production countries, release trends, audience ratings, and relationships between numerical variables through data cleaning, analysis, and visualization.
 
-An exploratory data analysis of the Amazon Prime Video catalogue, done in Python with Pandas, Matplotlib and Seaborn. I looked at what the catalogue contains, how it has grown over time, how titles are rated, and where the data is incomplete, and I turned the results into suggestions for a streaming business.
+## Project Overview
 
+Streaming platforms need to understand their content libraries to make informed content and catalog decisions. This project explores a dataset of Amazon Prime Video titles to identify patterns, trends, and data quality issues.
 
+The analysis uses two datasets:
 
-\## Project Overview
+- **Titles:** Movie and TV show metadata, including release year, genres, production countries, runtime, certification, and ratings.
+- **Credits:** Actors and directors associated with titles.
 
+## Objectives
 
+- Compare the distribution of movies and TV shows.
+- Identify the most common genres and production countries.
+- Explore content release trends over time.
+- Analyze IMDb and TMDB ratings and popularity.
+- Investigate missing values, duplicates, and relationships between numerical variables.
+- Communicate findings through clear visualizations.
 
-This is an individual project. The dataset has information on nearly 10,000 movies and TV shows, including content type, release year, genres, production countries, runtime, age certification, IMDb scores and votes, and TMDB popularity and scores. A second dataset lists the people (actors and directors) connected to each title.
+## Tools & Technologies
 
+- Python
+- Pandas and NumPy
+- Matplotlib and Seaborn
+- Jupyter Notebook / Google Colab
+- CSV datasets
 
+## Dataset
 
-\## Business Objective
+The project uses the following files in the `datasets/` folder:
 
+| File | Description |
+|---|---|
+| `titles.csv` | Content metadata for movies and TV shows |
+| `credits.csv` | Actors and directors associated with titles |
 
+**Data source:** AlmaBetter.
 
-Streaming platforms compete by growing and improving their content libraries. The objective of this project is to find patterns in the Amazon Prime Video catalogue that can support content decisions.
+The analysis describes the available dataset; it does not measure actual streaming views or audience engagement.
 
+## Featured Visualizations
 
+### 1. Movies vs. TV Shows
 
-\## Dataset
+![Distribution of movies and TV shows](screenshots/01_content_type.png)
 
+Compares the number of movies and TV shows in the catalog.
 
+### 2. Top Genres
 
-\- `titles.csv`: one row per title, with `id`, `title`, `type`, `description`, `release\_year`, `age\_certification`, `runtime`, `genres`, `production\_countries`, `seasons`, `imdb\_id`, `imdb\_score`, `imdb\_votes`, `tmdb\_popularity` and `tmdb\_score`.
+![Top genres](screenshots/02_top_genres.png)
 
-\- `credits.csv`: the people connected to each title, with their role (actor or director).
+Highlights the genres that appear most frequently. Titles with multiple genres may be counted in more than one category.
 
+### 3. Production Countries
 
+![Top production countries](screenshots/03_production_countries.png)
 
-Source: AlmaBetter
+Shows the countries most represented in the dataset.
 
+### 4. Release Trends
 
+![Titles released by year](screenshots/04_release_trend.png)
 
-\## What I Did
+Explores how the number of titles varies by release year. Recent years may be incomplete in the source data.
 
+### 5. IMDb vs. TMDB Ratings
 
+![IMDb score compared with TMDB score](screenshots/05_imdb_vs_tmdb.png)
 
-\*\*Understanding the data\*\*
+Examines the relationship between IMDb and TMDB scores for titles with available ratings.
 
-\- Loaded both datasets and checked their shape, data types and duplicates.
+### 6. Correlation Heatmap
 
-\- Visualised missing values with a heatmap and a bar chart, and read the meaning of each column before deciding what to do with the gaps. Some are expected, for example `seasons` is empty for movies.
+![Correlation heatmap](screenshots/14_correlation_heatmap.png)
 
+Summarizes relationships between numerical variables, helping identify patterns for further investigation.
 
+## Key Findings
 
-\*\*Preparing the data\*\*
+- **Movies dominate the catalog:** The dataset contains substantially more movies than TV shows.
+- **Drama and Comedy are prominent genres:** These genres appear frequently in the catalog.
+- **The United States is strongly represented:** India and the United Kingdom are also among the prominent production countries.
+- **Release activity increases in more recent decades:** The final years should be interpreted cautiously because the dataset may be incomplete.
+- **IMDb and TMDB scores tend to move together:** However, the two rating systems do not produce identical scores.
+- **Metadata quality matters:** Missing certifications and other fields can affect comparisons and downstream analysis.
 
-\- Checked that every title `id` is unique.
+These findings describe the dataset analyzed in this project and should not be interpreted as measures of actual viewing behavior.
 
-\- Converted `genres` and `production\_countries` from text to Python lists with `ast.literal\_eval()`, then used `explode()` so a title with several genres or countries is counted once under each.
+## Data Preparation & Analysis
 
-\- Created a `release\_decade` column from `release\_year`.
+The notebook includes:
 
-\- Kept missing values instead of dropping or filling them blindly. In the age-certification charts, missing values are shown as "Not Rated".
+- Data loading and inspection
+- Data types, duplicate, and missing-value checks
+- Analysis of catalog composition and release trends
+- Genre and country analysis
+- IMDb and TMDB rating comparisons
+- Correlation analysis and visual exploration
 
-\- Treated very long runtimes as possible outliers to investigate, not as errors to delete.
+The notebook contains additional visualizations beyond the six featured in this README.
 
+## Repository Structure
 
-
-\*\*Analysis\*\*
-
-I made 15 charts that cover:
-
-\- Catalogue composition: content type, genres, production countries, age certifications
-
-\- Trends over time: titles by release year, movies vs TV shows by year
-
-\- Ratings and popularity: IMDb and TMDB ratings by type, IMDb vs TMDB, votes vs score, score and runtime distributions, a correlation heatmap and a pair plot
-
-
-
-\## Key Findings
-
-
-
-\### Movies far outnumber TV shows
-
-!\[Distribution of movies and TV shows](images/01\_content\_type.png)
-
-
-
-The catalogue has about 8,500 movies and about 1,350 TV shows, roughly 86% to 14%.
-
-
-
-\### Drama and Comedy lead the genres
-
-!\[Top 10 genres](images/02\_top\_genres.png)
-
-
-
-Drama is the biggest genre with about 4,750 titles, followed by Comedy (about 3,000), Thriller, Action and Romance. A title with several genres is counted under each one.
-
-
-
-\### Most titles are produced in the United States
-
-!\[Top 10 production countries](images/03\_production\_countries.png)
-
-
-
-The United States leads with about 5,300 titles, followed by India (about 1,070), the United Kingdom (about 930) and Canada (about 530). Countries are shown by their country codes.
-
-
-
-\### The catalogue is full of recent content
-
-!\[Titles released by year](images/04\_release\_trend.png)
-
-
-
-Releases stay low for most of the 20th century, then climb steeply from the 2000s and peak around 2021 at about 850 titles. The sharp drop in the final year is probably because the data for that year is incomplete, so I did not read it as a real decline.
-
-
-
-\### IMDb and TMDB scores move together, but not perfectly
-
-!\[IMDb score vs TMDB score](images/05\_imdb\_vs\_tmdb.png)
-
-
-
-Titles with higher IMDb scores generally have higher TMDB scores, but there is a wide spread around the trend.
-
-
-
-\### Correlation between the numerical variables
-
-!\[Correlation heatmap](images/14\_correlation\_heatmap.png)
-
-
-
-IMDb and TMDB scores have a moderate positive correlation (0.58). Release year and seasons are negatively correlated (-0.41). IMDb votes and TMDB popularity are only weakly related (0.26), and runtime has almost no relationship with ratings (about -0.10).
-
-
-
-\### Other findings from the notebook
-
-\- TV shows have a higher average IMDb and TMDB rating than movies in this dataset.
-
-\- Titles with many IMDb votes do not necessarily have the highest scores, so popularity and rating measure different things.
-
-\- A large part of the catalogue has no age certification.
-
-
-
-\## Recommendations
-
-
-
-\- Keep a balanced and varied content portfolio. Movies are the majority, so adding high-quality TV shows could improve variety and long-term engagement.
-
-\- Use the genre, country, rating and popularity insights when deciding what to acquire or produce. Less-represented genres and countries are chances to diversify.
-
-\- Do not judge content by ratings or vote counts alone. Look at ratings, popularity and engagement together.
-
-\- Improve metadata completeness, especially age certification, to support better recommendations and audience targeting.
-
-
-
-\## Limitations
-
-
-
-\- The data counts titles, not viewing, so it shows what is in the catalogue and not what people watch.
-
-\- IMDb and TMDB scores are audience ratings and only indicate quality roughly.
-
-\- The credits dataset is loaded and checked, but the actors and directors are not analysed in this notebook.
-
-
-
-\## Tools
-
-
-
-Python, Pandas, NumPy, Matplotlib, Seaborn, Google Colab
-
-
-
-\## Repository Structure
-
-
-
-```
-
+```text
 amazon-prime-video-python-eda/
-
-│
-
-├── Datasets/
-
-│   ├── titles.csv
-
-│   └── credits.csv
-
-│
-
-├── Notebook/
-
-│   └── Amazon\_Prime\_Video\_EDA.ipynb
-
-│
-
-├── images/
-
-│   ├── 01\_content\_type.png
-
-│   ├── 02\_top\_genres.png
-
-│   ├── 03\_production\_countries.png
-
-│   ├── 04\_release\_trend.png
-
-│   ├── 05\_imdb\_vs\_tmdb.png
-
-│   └── 14\_correlation\_heatmap.png
-
-│
-
+├── README.md
 ├── requirements.txt
-
-└── README.md
-
+├── datasets/
+│   ├── titles.csv
+│   └── credits.csv
+├── notebooks/
+│   └── Amazon_Prime_Video_EDA.ipynb
+└── screenshots/
+    ├── 01_content_type.png
+    ├── 02_top_genres.png
+    ├── 03_production_countries.png
+    ├── 04_release_trend.png
+    ├── 05_imdb_vs_tmdb.png
+    └── 14_correlation_heatmap.png
 ```
 
+## How to Run the Project
 
+### Option 1: Google Colab
 
-\## How to Run
+1. Open `notebooks/Amazon_Prime_Video_EDA.ipynb` in Google Colab.
+2. Upload `titles.csv` and `credits.csv`, or connect Google Drive and access the files there.
+3. Ensure the notebook's CSV paths point to the correct locations.
+4. Run the notebook cells from top to bottom.
 
+## Author
 
+**Vaibhav Deshmukh**
 
-1\. Clone or download the repository and keep the folder structure as it is.
+GitHub: [@vaibhavd8080](https://github.com/vaibhavd8080)
 
-2\. Install the libraries: `pip install -r requirements.txt`
+---
 
-3\. Open `Notebook/Amazon\_Prime\_Video\_EDA.ipynb` and run the cells from top to bottom. The notebook reads the data from `../Datasets/`, so run it from inside the `Notebook` folder.
-
-
-
-In Google Colab, upload `titles.csv` and `credits.csv` and change the two paths in the data-loading cell to the uploaded file names.
-
-
-
-\## Author
-
-
-
-Vaibhav Deshmukh
-
-
-
-vaibhavd8080@gmail.com
-
+If you find this project useful, feel free to explore the notebook and its visualizations.
