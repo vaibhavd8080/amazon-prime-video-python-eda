@@ -1,145 +1,107 @@
 # Amazon Prime Video — Exploratory Data Analysis
 
-An end-to-end Exploratory Data Analysis (EDA) project exploring Amazon Prime Video's content catalog using Python, Pandas, Matplotlib, and Seaborn.
+An individual exploratory data analysis project using Python to examine an Amazon Prime Video catalogue dataset. The analysis explores content types, genres, production countries, release trends, ratings, popularity and available cast/director information.
 
-The project investigates content types, genres, production countries, release trends, audience ratings, and relationships between numerical variables through data cleaning, analysis, and visualization.
+## Project questions
 
-## Project Overview
+- How are movies and TV shows distributed in the dataset?
+- Which genres and production countries appear most frequently?
+- How does the number of titles vary by release year?
+- How do IMDb and TMDB ratings compare?
+- What patterns appear in the numerical variables?
+- Which actors and directors have the most credits in the available data?
 
-Streaming platforms need to understand their content libraries to make informed content and catalog decisions. This project explores a dataset of Amazon Prime Video titles to identify patterns, trends, and data quality issues.
+## Featured visualisations
 
-The analysis uses two datasets:
+The following six screenshots are committed to this repository.
 
-- **Titles:** Movie and TV show metadata, including release year, genres, production countries, runtime, certification, and ratings.
-- **Credits:** Actors and directors associated with titles.
+### 1. Movies and TV shows
 
-## Objectives
+![Content type distribution](screenshots/01_content_type.png)
 
-- Compare the distribution of movies and TV shows.
-- Identify the most common genres and production countries.
-- Explore content release trends over time.
-- Analyze IMDb and TMDB ratings and popularity.
-- Investigate missing values, duplicates, and relationships between numerical variables.
-- Communicate findings through clear visualizations.
+### 2. Top genres
 
-## Tools & Technologies
+![Top genres](screenshots/02_top_genres.png)
+
+### 3. Production countries
+
+![Production countries](screenshots/03_production_countries.png)
+
+### 4. Release trends
+
+![Release trends](screenshots/04_release_trend.png)
+
+### 5. IMDb and TMDB ratings
+
+![IMDb and TMDB ratings](screenshots/05_imdb_vs_tmdb.png)
+
+### 6. Correlation heatmap
+
+![Correlation heatmap](screenshots/14_correlation_heatmap.png)
+
+## Dataset
+
+The repository contains two CSV files in the \`datasets/\` folder:
+
+| File | Description |
+|---|---|
+| [titles.csv](datasets/titles.csv) | Title metadata, including type, release year, genres, countries, runtime and ratings |
+| [credits.csv](datasets/credits.csv) | Actor and director credit records |
+
+The existing project documentation attributes the dataset to AlmaBetter. A direct source-page URL and dataset licence are not currently recorded in this repository; those should be added if available.
+
+This analysis describes the dataset provided for the project. It does not measure actual streaming views, watch time, subscriptions or audience engagement.
+
+## Notebook
+
+[Open the Amazon Prime Video EDA notebook](notebooks/Amazon%20Prime%20Video%20%E2%80%93%20Exploratory%20Data%20Analysis.ipynb)
+
+The notebook covers data loading, inspection, data-quality checks, exploratory analysis and visualisation. It contains additional charts beyond the six selected for this README.
+
+## Tools and libraries
 
 - Python
 - Pandas and NumPy
 - Matplotlib and Seaborn
 - Jupyter Notebook / Google Colab
-- CSV datasets
 
-## Dataset
+Install the listed libraries with:
 
-The project uses the following files in the `datasets/` folder:
+\`\`\`bash
+pip install -r requirements.txt
+\`\`\`
 
-| File | Description |
-|---|---|
-| `titles.csv` | Content metadata for movies and TV shows |
-| `credits.csv` | Actors and directors associated with titles |
+## How to run
 
-**Data source:** AlmaBetter.
-
-The analysis describes the available dataset; it does not measure actual streaming views or audience engagement.
-
-## Featured Visualizations
-
-### 1. Movies vs. TV Shows
-
-![Distribution of movies and TV shows](screenshots/01_content_type.png)
-
-Compares the number of movies and TV shows in the catalog.
-
-### 2. Top Genres
-
-![Top genres](screenshots/02_top_genres.png)
-
-Highlights the genres that appear most frequently. Titles with multiple genres may be counted in more than one category.
-
-### 3. Production Countries
-
-![Top production countries](screenshots/03_production_countries.png)
-
-Shows the countries most represented in the dataset.
-
-### 4. Release Trends
-
-![Titles released by year](screenshots/04_release_trend.png)
-
-Explores how the number of titles varies by release year. Recent years may be incomplete in the source data.
-
-### 5. IMDb vs. TMDB Ratings
-
-![IMDb score compared with TMDB score](screenshots/05_imdb_vs_tmdb.png)
-
-Examines the relationship between IMDb and TMDB scores for titles with available ratings.
-
-### 6. Correlation Heatmap
-
-![Correlation heatmap](screenshots/14_correlation_heatmap.png)
-
-Summarizes relationships between numerical variables, helping identify patterns for further investigation.
-
-## Key Findings
-
-- **Movies dominate the catalog:** The dataset contains substantially more movies than TV shows.
-- **Drama and Comedy are prominent genres:** These genres appear frequently in the catalog.
-- **The United States is strongly represented:** India and the United Kingdom are also among the prominent production countries.
-- **Release activity increases in more recent decades:** The final years should be interpreted cautiously because the dataset may be incomplete.
-- **IMDb and TMDB scores tend to move together:** However, the two rating systems do not produce identical scores.
-- **Metadata quality matters:** Missing certifications and other fields can affect comparisons and downstream analysis.
-
-These findings describe the dataset analyzed in this project and should not be interpreted as measures of actual viewing behavior.
-
-## Data Preparation & Analysis
-
-The notebook includes:
-
-- Data loading and inspection
-- Data types, duplicate, and missing-value checks
-- Analysis of catalog composition and release trends
-- Genre and country analysis
-- IMDb and TMDB rating comparisons
-- Correlation analysis and visual exploration
-
-The notebook contains additional visualizations beyond the six featured in this README.
-
-## Repository Structure
-
-```text
-amazon-prime-video-python-eda/
-├── README.md
-├── requirements.txt
-├── datasets/
-│   ├── titles.csv
-│   └── credits.csv
-├── notebooks/
-│   └── Amazon_Prime_Video_EDA.ipynb
-└── screenshots/
-    ├── 01_content_type.png
-    ├── 02_top_genres.png
-    ├── 03_production_countries.png
-    ├── 04_release_trend.png
-    ├── 05_imdb_vs_tmdb.png
-    └── 14_correlation_heatmap.png
-```
-
-## How to Run the Project
-
-### Option 1: Google Colab
-
-1. Open `notebooks/Amazon_Prime_Video_EDA.ipynb` in Google Colab.
-2. Upload `titles.csv` and `credits.csv`, or connect Google Drive and access the files there.
-3. Ensure the notebook's CSV paths point to the correct locations.
+1. Clone or download this repository.
+2. Open the notebook linked above in Jupyter Notebook or Google Colab.
+3. Make sure the notebook's input paths point to \`datasets/titles.csv\` and \`datasets/credits.csv\` (or to the corresponding uploaded files in Colab).
 4. Run the notebook cells from top to bottom.
+5. If a cell refers to a Colab-specific path such as \`/content/\`, upload the matching CSV file to the Colab session or update that path.
+
+## Repository structure
+
+- \`datasets/titles.csv\` — title metadata
+- \`datasets/credits.csv\` — cast and director credits
+- \`notebooks/Amazon Prime Video – Exploratory Data Analysis.ipynb\` — analysis notebook
+- \`screenshots/\` — six selected visualisations
+- \`requirements.txt\` — Python libraries
+
+## Findings and interpretation
+
+The notebook explores catalogue composition, genre and country frequency, release-year patterns, rating comparisons and numerical correlations. The screenshots provide visual examples of those analyses.
+
+The README intentionally avoids publishing exact rankings or numerical conclusions that have not been independently checked against the saved notebook outputs. Recheck the notebook outputs before adding specific figures.
+
+## Limitations
+
+- The dataset is a snapshot and does not represent the current catalogue.
+- Genre and country fields can contain multiple values per title; category counts may overlap.
+- Missing values and incomplete recent-year records can affect comparisons.
+- Ratings and popularity fields describe the available metadata, not actual viewing behaviour.
+- The source attribution and licence need a direct citation in the repository.
 
 ## Author
 
-**Vaibhav Deshmukh**
-
-GitHub: [@vaibhavd8080](https://github.com/vaibhavd8080)
-
----
-
-If you find this project useful, feel free to explore the notebook and its visualizations.
+**Vaibhav Deshmukh**  
+[GitHub profile](https://github.com/vaibhavd8080)
